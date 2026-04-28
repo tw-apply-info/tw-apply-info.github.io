@@ -1,0 +1,13 @@
+<div class="sidebar-module">
+  <h4>{{ site.locales[site.default_locale].Categories }}</h4>
+  {% assign cat_names = "" | split: "" %}
+  {% for cat in site.categories %}
+    {% assign cat_names = cat_names | push: cat[0] %}
+  {% endfor %}
+  {% assign cat_names = cat_names | sort | reverse %}
+  {% for cat_name in cat_names %}
+    {% assign cat_posts = site.categories[cat_name] %}
+  <li><a href="{{ site.baseurl }}/categories/#{{ cat_name }}" title="{{ cat_name }}" rel="{{ cat_posts.size }}">{{ cat_name }} ({{ cat_posts.size }})</a></li>
+  {% endfor %}
+</div>
+

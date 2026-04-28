@@ -1,0 +1,57 @@
+---
+layout: default
+---
+<div class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 itemprop="name" class="post-title">{{ page.title }}</h1>
+    <meta itemprop="keywords" content="{{ page.tags | join: ',' }}" />
+    <p class="post-meta">
+    {{ site.locales[site.default_locale].PostedInCategories }}
+    {% for cat in page.categories %}
+    <a href="{{site.baseurl}}/categories/#{{ cat }}">{{ cat }}</a>{% unless page.categories.last == cat %}, {% endunless %}
+    {% endfor %}
+    <time itemprop="datePublished" datetime="{{ page.date | date: '%Y-%m-%d' }}">
+    {{ site.locales[site.default_locale].PostDate }}{{ page.date | date: "%b %-d, %Y" }}
+    </time>
+    <br />
+    {% if page.degrees != empty %}
+    Degrees:
+    {% for degree in page.degrees %}
+    <a href="{{ site.baseurl }}/degrees/#{{ degree }}" title="{{ degree }}">{{ degree }}</a>{% unless page.degrees.last == degree %}, {% endunless %}
+    {% endfor %}
+    <br />
+    {% endif %}
+    {% if page.programs != empty %}
+    Programs:
+    {% for program in page.programs %}
+    <a href="{{ site.baseurl }}/programs/#{{ program }}" title="{{ program }}">{{ program }}</a>{% unless page.programs.last == program %}, {% endunless %}
+    {% endfor %}
+    <br />
+    {% endif %}
+    {% if page.research != empty %}
+    Research:
+    {% for item in page.research %}
+    <a href="{{ site.baseurl }}/research/#{{ item }}" title="{{ item }}">{{ item }}</a>{% unless page.research.last == item %}, {% endunless %}
+    {% endfor %}
+    <br />
+    {% endif %}
+    {% if page.tags != empty %}
+    Schools:
+    {% for tag in page.tags %}
+    <a href="{{ site.baseurl }}/schools/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>{% unless page.tags.last == tag %}, {% endunless %}
+    {% endfor %}
+    {% endif %}
+    </p>
+  </header>
+
+  <article class="post-content" itemprop="articleBody">
+    {{ content }}
+  </article>
+  <hr />
+</div>
+
+
+{% include page_pagination.html%}
+{% include comments.html %}
+

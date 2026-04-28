@@ -1,0 +1,6 @@
+<div class="sidebar-module">
+  <h4>{{ site.locales[site.default_locale].Schools }}</h4>
+  {% for tag in site.tags %}
+    <a href="{{ site.baseurl }}/schools/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>{% unless forloop.last %} | {% endunless %}
+  {% endfor %}
+</div>

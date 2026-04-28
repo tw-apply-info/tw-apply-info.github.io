@@ -1,0 +1,15 @@
+<div class="sidebar-module">
+  <h4>Research</h4>
+  {% assign all_research = "" | split: "" %}
+  {% for post in site.posts %}
+    {% for item in post.research %}
+      {% unless all_research contains item %}
+        {% assign all_research = all_research | push: item %}
+      {% endunless %}
+    {% endfor %}
+  {% endfor %}
+  {% assign all_research = all_research | sort %}
+  {% for item in all_research %}
+    <a href="{{ site.baseurl }}/research/#{{ item }}" title="{{ item }}">{{ item }}</a>{% unless forloop.last %} | {% endunless %}
+  {% endfor %}
+</div>

@@ -1,0 +1,64 @@
+---
+layout: default
+---
+
+<div class="home">
+  <div class="post" itemscope itemtype="http://schema.org/BlogPosting" >
+    
+    {% for post in paginator.posts %}
+  
+    <header class="post-header">
+      <h1 itemprop="name" class="post-title">
+        <a itemprop="url" class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+      </h1>
+      <meta itemprop="keywords" content="{{ post.tags | join: ',' }}" />
+      <p class="post-meta">
+      {{ site.locales[site.default_locale].PostedInCategories }}
+      {% for cat in post.categories %}
+      <a href="{{site.baseurl}}/categories/#{{ cat }}">{{ cat }}</a>{% unless post.categories.last == cat%}, {% endunless %}
+      {% endfor %}
+      <time itemprop="datePublished" datetime="{{ post.date | date: '%Y-%m-%d' }}">
+      {{ site.locales[site.default_locale].PostDate }}{{ post.date | date: "%b %-d, %Y" }}
+      </time>
+      <br />
+      {% if post.degrees != empty %}
+      Degrees:
+      {% for degree in post.degrees %}
+      <a href="{{ site.baseurl }}/degrees/#{{ degree }}" title="{{ degree }}">{{ degree }}</a>{% unless post.degrees.last == degree %}, {% endunless %}
+      {% endfor %}
+      <br />
+      {% endif %}
+      {% if post.programs != empty %}
+      Programs:
+      {% for program in post.programs %}
+      <a href="{{ site.baseurl }}/programs/#{{ program }}" title="{{ program }}">{{ program }}</a>{% unless post.programs.last == program %}, {% endunless %}
+      {% endfor %}
+      <br />
+      {% endif %}
+      {% if post.research != empty %}
+      Research:
+      {% for item in post.research %}
+      <a href="{{ site.baseurl }}/research/#{{ item }}" title="{{ item }}">{{ item }}</a>{% unless post.research.last == item %}, {% endunless %}
+      {% endfor %}
+      <br />
+      {% endif %}
+      {% if post.tags != empty %}
+      Schools:
+      {% for tag in post.tags %}
+      <a href="{{ site.baseurl }}/schools/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>{% unless post.tags.last == tag %}, {% endunless %}
+      {% endfor %}
+      {% endif %}
+      </p>
+    </header>
+
+    <article class="post-content" itemprop="articleBody">
+      {{ post.excerpt }}
+      {% if post.content contains '<!-- more -->' %}
+      <a class="read-more" href="{{ post.url | prepend: site.baseurl }}">Read More &raquo;</a>
+      {% endif %}
+    </article> <hr />
+    
+    {% endfor %}
+  
+  </div>
+</div>

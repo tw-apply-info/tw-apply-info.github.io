@@ -1,0 +1,15 @@
+<div class="sidebar-module">
+  <h4>Degrees</h4>
+  {% assign all_degrees = "" | split: "" %}
+  {% for post in site.posts %}
+    {% for degree in post.degrees %}
+      {% unless all_degrees contains degree %}
+        {% assign all_degrees = all_degrees | push: degree %}
+      {% endunless %}
+    {% endfor %}
+  {% endfor %}
+  {% assign all_degrees = all_degrees | sort %}
+  {% for degree in all_degrees %}
+    <a href="{{ site.baseurl }}/degrees/#{{ degree }}" title="{{ degree }}">{{ degree }}</a>{% unless forloop.last %} | {% endunless %}
+  {% endfor %}
+</div>

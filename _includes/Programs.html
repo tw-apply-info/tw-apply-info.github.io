@@ -1,0 +1,15 @@
+<div class="sidebar-module">
+  <h4>Programs</h4>
+  {% assign all_programs = "" | split: "" %}
+  {% for post in site.posts %}
+    {% for program in post.programs %}
+      {% unless all_programs contains program %}
+        {% assign all_programs = all_programs | push: program %}
+      {% endunless %}
+    {% endfor %}
+  {% endfor %}
+  {% assign all_programs = all_programs | sort %}
+  {% for program in all_programs %}
+    <a href="{{ site.baseurl }}/programs/#{{ program }}" title="{{ program }}">{{ program }}</a>{% unless forloop.last %} | {% endunless %}
+  {% endfor %}
+</div>
