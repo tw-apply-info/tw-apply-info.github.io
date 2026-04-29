@@ -1,0 +1,714 @@
+---
+layout: null
+permalink: /submit/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Submit - Application Info TW</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body { padding-top: 20px; padding-bottom: 60px; background: #f8f8f8; }
+        .page-header a { color: inherit; text-decoration: none; }
+        .page-header a:hover { text-decoration: underline; }
+        .required { color: #c00; }
+
+        /* Tag chip input */
+        .tag-input-container {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 4px 6px;
+            min-height: 36px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4px;
+            background: #fff;
+            cursor: text;
+        }
+        .tag-input-container:focus-within {
+            border-color: #66afe9;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+        }
+        .tag-chip {
+            background: #e0eaf6;
+            border: 1px solid #b0c8e8;
+            border-radius: 3px;
+            padding: 1px 7px;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+        .tag-chip .remove-tag {
+            cursor: pointer; color: #888; font-weight: bold; font-size: 15px; line-height: 1;
+        }
+        .tag-chip .remove-tag:hover { color: #c00; }
+        .tag-input-field {
+            border: none; outline: none; flex: 1; min-width: 120px;
+            font-size: 14px; padding: 2px 4px; background: transparent;
+        }
+
+        /* Results table */
+        #results-table th { background: #f5f5f5; white-space: nowrap; }
+        .col-school-full { min-width: 260px; }
+        .col-program { width: 160px; }
+        .col-result  { width: 115px; }
+        .col-date    { width: 145px; }
+        .date-cell   { display: flex; align-items: center; gap: 4px; }
+        .date-cell input[type="date"] { flex: 1; }
+        .btn-no-date { white-space: nowrap; font-size: 11px; padding: 2px 6px; }
+        .col-del     { width: 36px; text-align: center; }
+
+        /* School autocomplete dropdown */
+        #school-dropdown {
+            position: fixed;
+            z-index: 9999;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 0 0 4px 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,.15);
+            max-height: 260px;
+            overflow-y: auto;
+            display: none;
+        }
+        .school-dropdown-item {
+            padding: 7px 12px;
+            cursor: pointer;
+            font-size: 13px;
+            border-bottom: 1px solid #f0f0f0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .school-dropdown-item:last-child { border-bottom: none; }
+        .school-dropdown-item:hover, .school-dropdown-item.active {
+            background: #e8f0fe;
+        }
+        .school-dropdown-item .abbrev-badge {
+            display: inline-block;
+            background: #2a7ae2;
+            color: #fff;
+            border-radius: 3px;
+            padding: 0 5px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+        .school-dropdown-empty {
+            padding: 8px 12px;
+            color: #999;
+            font-size: 13px;
+            font-style: italic;
+        }
+
+        /* Preview */
+        #preview-box {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: Menlo, Monaco, Consolas, monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 420px;
+            overflow-y: auto;
+        }
+        #preview-section { display: none; margin-top: 20px; }
+        .panel { margin-bottom: 20px; }
+        .form-horizontal .form-group { margin-bottom: 14px; }
+
+        #csv-status { font-size: 12px; color: #888; margin-left: 8px; }
+        ::placeholder { color: #ccc !important; opacity: 1; }
+        :-ms-input-placeholder { color: #ccc !important; }
+        ::-ms-input-placeholder { color: #ccc !important; }
+    </style>
+</head>
+<body>
+
+<!-- Global school autocomplete dropdown (appended to body to avoid overflow clipping) -->
+<div id="school-dropdown"></div>
+
+<div class="container">
+<div class="row">
+<div class="col-md-10 col-md-offset-1">
+
+    <h1 class="page-header">
+        <a href="/">Application Info TW</a>
+        <small>Submit Record</small>
+    </h1>
+
+    <!-- Panel 1: Basic Info -->
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4 class="panel-title">Basic Information</h4></div>
+        <div class="panel-body">
+            <div class="form-horizontal">
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Term <span class="required">*</span></label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="term-season">
+                            <option value="Fall">Fall</option>
+                            <option value="Spring">Spring</option>
+                            <option value="Summer">Summer</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="term-year"
+                               placeholder="Year" min="2000" max="2099" value="2025">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Degree(s) <span class="required">*</span></label>
+                    <div class="col-sm-9">
+                        <div id="degrees-tags" class="tag-input-container">
+                            <input type="text" class="tag-input-field" id="degrees-input"
+                                   placeholder="Type and press Enter — e.g. PhD, MS, MEng">
+                        </div>
+                        <p class="help-block">Common: PhD · MS · MEng · MCS · MA</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Program(s) <span class="required">*</span></label>
+                    <div class="col-sm-9">
+                        <div id="programs-tags" class="tag-input-container">
+                            <input type="text" class="tag-input-field" id="programs-input"
+                                   placeholder="Type and press Enter — e.g. Computer Science">
+                        </div>
+                        <p class="help-block">Press Enter or comma to add each program.</p>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom:0;">
+                    <label class="col-sm-3 control-label">Research Interest(s)</label>
+                    <div class="col-sm-9">
+                        <div id="research-tags" class="tag-input-container">
+                            <input type="text" class="tag-input-field" id="research-input"
+                                   placeholder="Type and press Enter — e.g. Machine Learning">
+                        </div>
+                        <p class="help-block" style="margin-bottom:0;">Press Enter or comma to add each interest.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel 2: Application Results -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                Application Results
+                <span id="csv-status">Loading schools...</span>
+            </h4>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-condensed" id="results-table">
+                    <thead>
+                        <tr>
+                            <th class="col-school-full">School</th>
+                            <th class="col-program">Program</th>
+                            <th class="col-result">Result</th>
+                            <th class="col-date">Date</th>
+                            <th class="col-del"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body"></tbody>
+                </table>
+            </div>
+            <button type="button" class="btn btn-default btn-sm" id="add-row-btn">+ Add School</button>
+
+            <hr style="margin: 16px 0;">
+            <div class="form-horizontal">
+                <div class="form-group" style="margin-bottom:0;">
+                    <label class="col-sm-3 control-label">Decision</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="decision"
+                               placeholder="Which school did you choose?">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel 3: Background -->
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4 class="panel-title">Background</h4></div>
+        <div class="panel-body">
+            <div class="form-horizontal">
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Background</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" id="background" rows="4"
+                            placeholder="e.g. BS in NTU CSIE 2017-2021&#10;GPA 3.77/4.3&#10;MS in NTU CSIE 2021-2023&#10;GPA 4.26/4.3"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">English Scores</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" id="english-scores" rows="2"
+                            placeholder="e.g. TOEFL R27 L27 S22 W22 Total 98&#10;GRE V149 Q170 AW3.0"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Publications</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" id="publications" rows="3"
+                            placeholder="e.g. 1st-author NeurIPS 2024"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Recommendations</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" id="recommendations" rows="2"
+                            placeholder="e.g. 2 from NTU, 1 from advisor"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom:0;">
+                    <label class="col-sm-3 control-label">Other Comments</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" id="other-comments" rows="5"
+                            placeholder="N/A"></textarea>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Alert -->
+    <div id="error-alert" class="alert alert-danger" style="display:none;"></div>
+
+    <!-- Generate Button -->
+    <div class="form-group">
+        <button type="button" class="btn btn-primary btn-lg" id="generate-btn">
+            Generate Markdown File
+        </button>
+    </div>
+
+    <!-- Preview + Download -->
+    <div id="preview-section">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4 class="panel-title">Preview</h4></div>
+            <div class="panel-body">
+                <pre id="preview-box"></pre>
+                <div style="margin-top:15px; display:flex; align-items:center; gap:12px;">
+                    <button type="button" class="btn btn-success btn-lg" id="download-btn">
+                        Download .md File
+                    </button>
+                    <span class="text-muted" id="filename-label"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <p class="text-muted"><a href="/">&larr; Back to Home</a></p>
+
+</div>
+</div>
+</div>
+
+<script>
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function escAttr(s) {
+    return String(s).replace(/"/g,'&quot;');
+}
+function resultColor(r) {
+    return {Admission:'green',Rejection:'red',Pending:'orange',Interview:'blue',Waitlist:'purple'}[r]||'black';
+}
+
+// ─── CSV Parser ───────────────────────────────────────────────────────────────
+function parseCSV(text) {
+    const lines = text.trim().split('\n');
+    const result = [];
+    for (let i = 1; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (!line) continue;
+        const fields = [];
+        let field = '', inQ = false;
+        for (let j = 0; j < line.length; j++) {
+            const c = line[j];
+            if (c === '"') { inQ = !inQ; }
+            else if (c === ',' && !inQ) { fields.push(field); field = ''; }
+            else { field += c; }
+        }
+        fields.push(field);
+        if (fields.length >= 2) {
+            result.push({ name: fields[0].trim(), abbrev: fields[1].trim() });
+        }
+    }
+    return result;
+}
+
+// ─── School Data ──────────────────────────────────────────────────────────────
+let schoolsData = [];
+
+fetch('/schools.csv')
+    .then(r => r.text())
+    .then(text => {
+        schoolsData = parseCSV(text);
+        document.getElementById('csv-status').textContent = '(' + schoolsData.length + ' schools loaded)';
+    })
+    .catch(() => {
+        document.getElementById('csv-status').textContent = '(could not load schools.csv)';
+    });
+
+// ─── School Autocomplete ──────────────────────────────────────────────────────
+const dropdown = document.getElementById('school-dropdown');
+let activeFullInput   = null;
+let activeAbbrevInput = null;
+let activeIndex = -1;
+
+function filterSchools(query) {
+    if (!query) return [];
+    const q = query.toLowerCase();
+    return schoolsData.filter(s =>
+        s.name.toLowerCase().includes(q) || s.abbrev.toLowerCase().includes(q)
+    ).slice(0, 12);
+}
+
+function showDropdown(fullInput, abbrevInput, query) {
+    activeFullInput   = fullInput;
+    activeAbbrevInput = abbrevInput;
+    activeIndex = -1;
+
+    const matches = filterSchools(query);
+    if (!matches.length) { hideDropdown(); return; }
+
+    const rect = fullInput.getBoundingClientRect();
+    dropdown.style.left  = rect.left + 'px';
+    dropdown.style.top   = rect.bottom + 2 + 'px';
+    dropdown.style.width = Math.max(rect.width, 320) + 'px';
+    dropdown.style.display = 'block';
+
+    dropdown.innerHTML = matches.map((s, i) =>
+        `<div class="school-dropdown-item" data-idx="${i}" data-name="${escAttr(s.name)}" data-abbrev="${escAttr(s.abbrev)}">` +
+        `<span class="abbrev-badge">${escHtml(s.abbrev)}</span>${escHtml(s.name)}</div>`
+    ).join('');
+
+    dropdown.querySelectorAll('.school-dropdown-item').forEach(item => {
+        item.addEventListener('mousedown', e => {
+            e.preventDefault();
+            selectSchool(item.dataset.name, item.dataset.abbrev);
+        });
+        item.addEventListener('mouseover', () => {
+            setActive(parseInt(item.dataset.idx));
+        });
+    });
+}
+
+function hideDropdown() {
+    dropdown.style.display = 'none';
+    activeIndex = -1;
+}
+
+function setActive(idx) {
+    const items = dropdown.querySelectorAll('.school-dropdown-item');
+    items.forEach((el, i) => el.classList.toggle('active', i === idx));
+    activeIndex = idx;
+}
+
+function selectSchool(name, abbrev) {
+    if (activeFullInput)   activeFullInput.value   = name;
+    if (activeAbbrevInput) activeAbbrevInput.value = abbrev;
+    hideDropdown();
+}
+
+// Close dropdown on outside click or scroll
+document.addEventListener('click', e => {
+    if (!dropdown.contains(e.target)) hideDropdown();
+});
+window.addEventListener('scroll', hideDropdown, true);
+
+function attachSchoolAutocomplete(tr) {
+    const fullInput   = tr.querySelector('.school-full');
+    const abbrevInput = tr.querySelector('.school-abbrev');
+
+    fullInput.addEventListener('input', () => {
+        showDropdown(fullInput, abbrevInput, fullInput.value);
+    });
+    fullInput.addEventListener('focus', () => {
+        if (fullInput.value) showDropdown(fullInput, abbrevInput, fullInput.value);
+    });
+    fullInput.addEventListener('blur', () => {
+        setTimeout(hideDropdown, 150);
+    });
+    fullInput.addEventListener('keydown', e => {
+        const items = dropdown.querySelectorAll('.school-dropdown-item');
+        if (!items.length) return;
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            setActive(Math.min(activeIndex + 1, items.length - 1));
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            setActive(Math.max(activeIndex - 1, 0));
+        } else if (e.key === 'Enter' && activeIndex >= 0) {
+            e.preventDefault();
+            const item = items[activeIndex];
+            selectSchool(item.dataset.name, item.dataset.abbrev);
+        } else if (e.key === 'Escape') {
+            hideDropdown();
+        }
+    });
+}
+
+// ─── Tag Input ────────────────────────────────────────────────────────────────
+const tagSets = { degrees: [], programs: [], research: [] };
+
+function setupTagInput(containerId, inputId, key) {
+    const container = document.getElementById(containerId);
+    const input     = document.getElementById(inputId);
+    container.addEventListener('click', () => input.focus());
+
+    function addTag(raw) {
+        const value = raw.trim().replace(/,+$/, '');
+        if (!value || tagSets[key].includes(value)) return;
+        tagSets[key].push(value);
+        renderTags(containerId, inputId, key);
+    }
+    input.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ',') {
+            e.preventDefault(); addTag(input.value); input.value = '';
+        } else if (e.key === 'Backspace' && input.value === '' && tagSets[key].length > 0) {
+            tagSets[key].pop(); renderTags(containerId, inputId, key);
+        }
+    });
+    input.addEventListener('blur', () => {
+        if (input.value.trim()) { addTag(input.value); input.value = ''; }
+    });
+}
+
+function renderTags(containerId, inputId, key) {
+    const container = document.getElementById(containerId);
+    const input     = document.getElementById(inputId);
+    container.querySelectorAll('.tag-chip').forEach(el => el.remove());
+    tagSets[key].forEach((tag, i) => {
+        const chip = document.createElement('span');
+        chip.className = 'tag-chip';
+        chip.innerHTML = `${escHtml(tag)} <span class="remove-tag" title="Remove">×</span>`;
+        chip.querySelector('.remove-tag').addEventListener('click', () => {
+            tagSets[key].splice(i, 1); renderTags(containerId, inputId, key);
+        });
+        container.insertBefore(chip, input);
+    });
+}
+
+setupTagInput('degrees-tags',  'degrees-input',  'degrees');
+setupTagInput('programs-tags', 'programs-input', 'programs');
+setupTagInput('research-tags', 'research-input', 'research');
+
+// ─── Results Table ────────────────────────────────────────────────────────────
+let rowCount = 0;
+
+function addRow(d) {
+    d = d || {};
+    rowCount++;
+    const id = rowCount;
+    const tbody = document.getElementById('results-body');
+    const tr = document.createElement('tr');
+    tr.id = 'row-' + id;
+
+    const opts = ['Admission','Waitlist','Interview','Rejection','Pending'];
+    const selOpts = opts.map(o =>
+        `<option value="${o}"${d.result===o?' selected':''}>${o}</option>`
+    ).join('');
+
+    tr.innerHTML = `
+        <td class="col-school-full">
+            <input type="text" class="form-control input-sm school-full" autocomplete="off"
+                   placeholder="Search school name or abbreviation..."
+                   value="${escAttr(d.school||'')}">
+            <input type="hidden" class="school-abbrev" value="${escAttr(d.abbrev||'')}">
+        </td>
+        <td class="col-program">
+            <input type="text" class="form-control input-sm school-prog"
+                   placeholder="e.g., CS, Physics, Finance" value="${escAttr(d.prog||'')}">
+        </td>
+        <td class="col-result">
+            <select class="form-control input-sm school-result">${selOpts}</select>
+        </td>
+        <td class="col-date">
+            <div class="date-cell">
+                <input type="date" class="form-control input-sm school-date" value="${escAttr(d.date||'')}">
+                <button type="button" class="btn btn-default btn-xs btn-no-date" title="Mark as unknown">−</button>
+            </div>
+        </td>
+        <td class="col-del">
+            <button class="btn btn-danger btn-xs" onclick="removeRow(${id})" title="Remove">✕</button>
+        </td>`;
+    tbody.appendChild(tr);
+    attachSchoolAutocomplete(tr);
+}
+
+function removeRow(id) {
+    const el = document.getElementById('row-' + id);
+    if (el) el.remove();
+}
+
+document.getElementById('add-row-btn').addEventListener('click', () => addRow());
+
+document.getElementById('results-body').addEventListener('click', e => {
+    if (e.target.classList.contains('btn-no-date')) {
+        const dateInput = e.target.closest('td').querySelector('.school-date');
+        if (dateInput) dateInput.value = '';
+    }
+});
+
+// Default 3 blank rows
+addRow(); addRow(); addRow();
+
+// ─── Markdown Generator ───────────────────────────────────────────────────────
+function generateMarkdown() {
+    const season   = document.getElementById('term-season').value;
+    const year     = document.getElementById('term-year').value.trim();
+    const term     = season + ' ' + year;
+    const decision = document.getElementById('decision').value.trim();
+    const bg       = document.getElementById('background').value.trim();
+    const eng      = document.getElementById('english-scores').value.trim();
+    const pubs     = document.getElementById('publications').value.trim();
+    const recs     = document.getElementById('recommendations').value.trim();
+    const other    = document.getElementById('other-comments').value.trim() || 'N/A';
+
+    const degrees  = [...tagSets.degrees];
+    const programs = tagSets.programs.map(titleCase);
+    const research = tagSets.research.map(titleCase);
+
+    const results = [];
+    document.querySelectorAll('#results-body tr').forEach(row => {
+        const full   = row.querySelector('.school-full').value.trim();
+        const abbrev = row.querySelector('.school-abbrev').value.trim();
+        const prog   = row.querySelector('.school-prog').value.trim();
+        const result = row.querySelector('.school-result').value;
+        const rawDate = row.querySelector('.school-date').value.trim();
+        const date = rawDate ? formatDate(rawDate) : '-';
+        if (full || abbrev) results.push({ full, abbrev, prog, result, date });
+    });
+
+    const errors = [];
+    if (!year || isNaN(year))  errors.push('Please enter a valid year.');
+    if (!degrees.length)        errors.push('Please add at least one degree.');
+    if (!programs.length)       errors.push('Please add at least one program.');
+    if (!results.length)        errors.push('Please add at least one application result.');
+
+    if (errors.length) {
+        const al = document.getElementById('error-alert');
+        al.innerHTML = '<strong>Please fix the following:</strong><ul>' +
+            errors.map(e => '<li>' + e + '</li>').join('') + '</ul>';
+        al.style.display = 'block';
+        window.scrollTo({ top: al.offsetTop - 20, behavior: 'smooth' });
+        return null;
+    }
+    document.getElementById('error-alert').style.display = 'none';
+
+    const resultOrder = ['Admission','Waitlist','Interview','Rejection','Pending'];
+    results.sort((a, b) => resultOrder.indexOf(a.result) - resultOrder.indexOf(b.result));
+
+    const admitted = results.filter(r => r.result === 'Admission').map(r => r.abbrev).filter(Boolean);
+    const allAbbr  = results.map(r => r.abbrev).filter(Boolean);
+    const titleSchools = (admitted.length ? admitted : allAbbr.slice(0,3)).join('/');
+    const title = '[' + term + '] ' + degrees.join('/') + ' - ' + programs.join('/') + ' - ' + titleSchools;
+
+    let fm = '---\n';
+    fm += 'published: true\n';
+    fm += 'title: "' + title + '"\n';
+    fm += 'layout: post\n';
+    fm += 'category: ' + year + ' ' + season + '\n';
+    if (degrees.length)  fm += 'degrees:\n'  + degrees.map(d => '- ' + d).join('\n')  + '\n';
+    if (programs.length) fm += 'programs:\n' + programs.map(p => '- ' + p).join('\n') + '\n';
+    if (research.length) fm += 'research:\n' + research.map(r => '- ' + r).join('\n') + '\n';
+    if (allAbbr.length)  fm += 'tags:\n'     + allAbbr.map(s  => '- ' + s).join('\n')  + '\n';
+    fm += '---';
+
+    const tableHeader = '| School | Program | Result | Date |\n| :-- | :--: | :--: | :--: |';
+    const tableRows = results.map(r => {
+        const label = r.full ? (r.abbrev ? r.full + ' (' + r.abbrev + ')' : r.full) : r.abbrev;
+        return '| ' + label + ' | ' + r.prog + ' | <span style="color:' + resultColor(r.result) + '">' + r.result + '</span> | ' + r.date + ' |';
+    }).join('\n');
+
+    function para(text) {
+        return '<p>\n' + (text ? text.replace(/\n/g, '<br>\n') : 'N/A') + '\n</p>';
+    }
+
+    const body = [
+        '\n<!-- more -->\n',
+        '#### Degree\n\n'              + (degrees.join(', ')  || 'N/A'),
+        '#### Program\n\n'             + (programs.join(', ') || 'N/A'),
+        '#### Term\n\n'                + term,
+        '#### Research Interests\n\n'  + (research.join(', ') || 'N/A'),
+        '#### Application Results\n\n' + tableHeader + '\n' + tableRows,
+        '#### Decision\n\n'            + (decision || 'N/A'),
+        '#### Background\n\n'          + para(bg),
+        '#### English Scores\n\n'      + para(eng),
+        '#### Publications\n\n'        + para(pubs),
+        '#### Recommendations\n\n'     + para(recs),
+        '#### Other Comments\n\n'      + other,
+    ].join('\n\n');
+
+    return fm + '\n' + body + '\n';
+}
+
+function titleCase(s) {
+    return s.replace(/\w\S*/g, w => w.charAt(0).toUpperCase() + w.slice(1));
+}
+
+function formatDate(iso) {
+    // iso = "YYYY-MM-DD", output = "M/D/Y"
+    const parts = iso.split('-');
+    if (parts.length < 3) return iso;
+    return parseInt(parts[1]) + '/' + parseInt(parts[2]) + '/' + parts[0];
+}
+
+function generateFilename() {
+    const season = document.getElementById('term-season').value.toLowerCase();
+    const year   = document.getElementById('term-year').value.trim();
+    const now    = new Date();
+    const tx     = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/Chicago',
+        year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit', second: '2-digit',
+        hour12: false
+    }).formatToParts(now);
+    const p = Object.fromEntries(tx.map(x => [x.type, x.value]));
+    const date = p.year + '-' + p.month + '-' + p.day;
+    const time = p.hour + p.minute + p.second;
+    return date + '-' + time + '-' + year + '-' + season + '.md';
+}
+
+document.getElementById('generate-btn').addEventListener('click', () => {
+    const md = generateMarkdown();
+    if (!md) return;
+    const filename = generateFilename();
+    document.getElementById('preview-box').textContent = md;
+    document.getElementById('filename-label').textContent = filename;
+    const section = document.getElementById('preview-section');
+    section.style.display = 'block';
+    section.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('download-btn').onclick = () => {
+        const blob = new Blob([md], { type: 'text/plain;charset=utf-8' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    };
+});
+</script>
+</body>
+</html>

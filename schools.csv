@@ -1,0 +1,379 @@
+School,Abbreviation
+American University,AU
+Arizona State University,ASU
+Auburn University,Auburn
+Baylor College of Medicine,BCM
+Baylor University,Baylor
+Binghamton University,Binghamton
+Boston College,BC
+Boston University,BU
+Brandeis University,Brandeis
+Brigham Young University,BYU
+Brown University,Brown
+California Institute of Technology,Caltech
+Carnegie Mellon University,CMU
+Case Western Reserve University,CWRU
+Catholic University of America,CUA
+Clemson University,Clemson
+Colorado School of Mines,CSM
+Colorado State University-Fort Collins,CSU
+Columbia University in the City of New York,Columbia
+Cornell University,Cornell
+CUNY Graduate School and University Center,CUNY
+Dartmouth College,Dartmouth
+Drexel University,Drexel
+Duke University,Duke
+East Carolina University,ECU
+Emory University,Emory
+Florida Atlantic University,FAU
+Florida International University,FIU
+Florida State University,FSU
+George Mason University,GMU
+George Washington University,GWU
+Georgetown University,Georgetown
+Georgia Institute of Technology,Georgia Tech
+Georgia State University,GSU
+Harvard University,Harvard
+Howard University,Howard
+Indiana University Bloomington,IU
+Indiana University Indianapolis,IUI
+Iowa State University,ISU
+Johns Hopkins University,JHU
+Kansas State University,K-State
+Kent State University at Kent,Kent State
+Lehigh University,Lehigh
+Louisiana State University and Agricultural & Mechanical College,LSU
+Loyola University Chicago,LUC
+Massachusetts Institute of Technology,MIT
+Medical University of South Carolina,MUSC
+Michigan State University,MSU
+Michigan Technological University,Michigan Tech
+Mississippi State University,Miss State
+Missouri University of Science and Technology,Missouri S&T
+Montana State University,MSU-Bozeman
+New Jersey Institute of Technology,NJIT
+New Mexico State University-Main Campus,NMSU
+New York University,NYU
+North Carolina State University at Raleigh,NC State
+North Dakota State University-Main Campus,NDSU
+Northeastern University,NEU
+Northern Arizona University,NAU
+Northwestern University,Northwestern
+Nova Southeastern University,NSU
+Ohio State University-Main Campus,OSU
+Ohio University-Main Campus,Ohio
+Oklahoma State University,Okla. State
+Old Dominion University,ODU
+Oregon State University,Oregon State
+Princeton University,Princeton
+Purdue University,Purdue
+Rensselaer Polytechnic Institute,RPI
+Rice University,Rice
+Rutgers University-New Brunswick,Rutgers
+Saint Louis University,SLU
+San Diego State University,SDSU
+Southern Illinois University-Carbondale,SIU
+Southern Methodist University,SMU
+Stanford University,Stanford
+Stony Brook University,SBU
+Syracuse University,Syracuse
+Temple University,Temple
+Texas A&M University-College Station,TAMU
+Texas Tech University,TTU
+The Pennsylvania State University,Penn State
+The University of Alabama,UA
+The University of Montana,UM
+The University of Tennessee Health Science Center,UTHSC
+The University of Tennessee-Knoxville,UTK
+The University of Texas at Arlington,UTA
+The University of Texas at Austin,UT Austin
+The University of Texas at Dallas,UTD
+The University of Texas at El Paso,UTEP
+The University of Texas at San Antonio,UTSA
+The University of Texas Health Science Center at Houston,UTHealth Houston
+The University of Texas Health Science Center at San Antonio,UT Health SA
+Tufts University,Tufts
+Tulane University of Louisiana,Tulane
+University at Albany,UAlbany
+University at Buffalo,UB
+University of Alabama at Birmingham,UAB
+University of Arizona,UArizona
+University of Arkansas,UArk
+"University of California, Berkeley",UC Berkeley
+"University of California, Davis",UC Davis
+"University of California, Irvine",UCI
+"University of California, Los Angeles",UCLA
+"University of California, Merced",UC Merced
+"University of California, Riverside",UCR
+"University of California, San Diego",UCSD
+"University of California, San Francisco",UCSF
+"University of California, Santa Barbara",UCSB
+"University of California, Santa Cruz",UCSC
+University of Central Florida,UCF
+University of Chicago,UChicago
+University of Cincinnati,UC
+University of Colorado Boulder,CU Boulder
+University of Colorado Denver/Anschutz Medical Campus,CU Denver
+University of Connecticut,UConn
+University of Dayton,UD
+University of Delaware,UDel
+University of Denver,DU
+University of Florida,UF
+University of Georgia,UGA
+University of Hawaii at Manoa,UH Manoa
+University of Houston,UH
+University of Idaho,UI
+University of Illinois Chicago,UIC
+University of Illinois Urbana-Champaign,UIUC
+University of Iowa,UIowa
+University of Kansas,KU
+University of Kentucky,UK
+University of Louisiana at Lafayette,UL Lafayette
+University of Louisville,UofL
+University of Maine,UMaine
+University of Maryland-Baltimore County,UMBC
+University of Maryland-College Park,UMD
+"University of Maryland, Baltimore",UMB
+University of Massachusetts-Amherst,UMass
+University of Massachusetts-Boston,UMass Boston
+University of Massachusetts-Lowell,UML
+University of Memphis,UofM
+University of Miami,Miami
+University of Michigan-Ann Arbor,UMich
+University of Minnesota-Twin Cities,UMN
+University of Mississippi,Ole Miss
+University of Missouri-Columbia,Mizzou
+University of Missouri-Kansas City,UMKC
+University of Nebraska Medical Center,UNMC
+University of Nebraska-Lincoln,UNL
+University of Nevada-Las Vegas,UNLV
+University of Nevada-Reno,UNR
+University of New Hampshire-Main Campus,UNH
+University of New Mexico-Main Campus,UNM
+University of North Carolina at Chapel Hill,UNC
+University of North Carolina at Charlotte,UNCC
+University of North Dakota,UND
+University of North Texas,UNT
+University of Notre Dame,Notre Dame
+University of Oklahoma-Norman Campus,OU
+University of Oregon,UO
+University of Pennsylvania,UPenn
+University of Pittsburgh-Pittsburgh Campus,Pitt
+University of Rhode Island,URI
+University of Rochester,UR
+University of South Carolina-Columbia,USC
+University of South Florida,USF
+University of Southern California,USC-LA
+University of Southern Mississippi,USM
+University of Texas Southwestern Medical Center,UTSW
+University of Toledo,UToledo
+University of Utah,Utah
+University of Vermont,UVM
+University of Virginia-Main Campus,UVA
+University of Washington-Seattle Campus,UW
+University of Wisconsin-Madison,UW-Madison
+University of Wisconsin-Milwaukee,UWM
+University of Wyoming,UWyo
+Utah State University,USU
+Vanderbilt University,Vanderbilt
+Virginia Commonwealth University,VCU
+Virginia Polytechnic Institute and State University,Virginia Tech
+Washington State University,WSU
+Washington University in St Louis,WashU
+Wayne State University,Wayne State
+Weill Cornell Medicine,WCM
+West Virginia University,WVU
+William & Mary,W&M
+Worcester Polytechnic Institute,WPI
+Yale University,Yale
+Abilene Christian University,ACU
+Air Force Institute of TechnologyGraduate School of Engineering & Management,AFIT
+Albert Einstein College of Medicine,Einstein
+Appalachian State University,App State
+Arkansas State University,Arkansas State
+Augusta University,Augusta
+Azusa Pacific University,APU
+Ball State University,Ball State
+Boise State University,Boise State
+Bowling Green State University,BGSU
+"California State Polytechnic University, Pomona",Cal Poly Pomona
+"California State University, Fresno",Fresno State
+"California State University, Fullerton",CSUF
+"California State University, Long Beach",CSULB
+"California State University, Los Angeles",CSULA
+"California State University, Sacramento",Sac State
+Central Michigan University,Central Michigan
+Chapman University,Chapman
+Claremont Graduate University,CGU
+Clark Atlanta University,CAU
+Clark University,Clark
+Clarkson University,Clarkson
+Cleveland State University,Cleveland State
+Creighton University,Creighton
+CUNY City College,CCNY
+CUNY Hunter College,Hunter
+Delaware State University,DSU
+DePaul University,DePaul
+Duquesne University,Duquesne
+East Tennessee State University,ETSU
+East Texas A&M University,ETAMU
+Eastern Michigan University,EMU
+"Eastern Virginia Medical School(EVMS ceased being a separate institution on July 1, 2024. It is now part of Old Dominion University.)",EVMS
+Embry-Riddle Aeronautical University-Daytona Beach,ERAU
+Florida Agricultural and Mechanical University,FAMU
+Florida Institute of Technology,Florida Tech
+Fordham University,Fordham
+Georgia Southern University,Georgia Southern
+Hampton University,Hampton
+Hofstra University,Hofstra
+Icahn School of Medicine at Mount Sinai,ISMMS
+Idaho State University,Idaho State
+Illinois Institute of Technology,Illinois Tech
+Illinois State University,Illinois State
+Indiana University of Pennsylvania,IUP
+Jackson State University,JSU
+James Madison University,JMU
+Kean University,Kean
+Kennesaw State University,KSU
+Lamar University,Lamar
+Loma Linda University,LLU
+Long Island University,LIU
+"Louisiana State University Health Sciences Center, New Orleans",LSUHSC
+Louisiana Tech University,Louisiana Tech
+Loyola Marymount University,LMU
+Marquette University,Marquette
+Marshall University,Marshall
+Medical College of Wisconsin,MCW
+Mercer University,Mercer
+"Miami University, Oxford",Miami (OH)
+Middle Tennessee State University,MTSU
+Montclair State University,Montclair State
+Morgan State University,Morgan State
+North Carolina A&T State University,NC A&T
+Northern Illinois University,NIU
+Oakland University,Oakland
+Oklahoma State University Center for Health Sciences,OSU-CHS
+Oregon Health & Science University,OHSU
+Pepperdine University,Pepperdine
+Portland State University,PSU
+Prairie View A&M University,PVAMU
+Rochester Institute of Technology,RIT
+Rockefeller University,Rockefeller
+Rowan University,Rowan
+Rush University,Rush
+Rutgers University–Camden,Rutgers-Camden
+Rutgers University–Newark,Rutgers-Newark
+Saint Joseph's University,SJU
+Sam Houston State University,SHSU
+San Francisco State University,SFSU
+San Jose State University,SJSU
+Seton Hall University,SHU
+South Carolina State University,SC State
+South Dakota State University,SD State
+Southern Connecticut State University,SCSU
+Southern University,Southern
+Stevens Institute of Technology,Stevens
+SUNY College of Environmental Science and Forestry,SUNY ESF
+Tarleton State University,Tarleton
+"Teachers College, Columbia University",TC Columbia
+Tennessee State University,TSU
+Tennessee Technological University,Tennessee Tech
+Texas A&M University–Corpus Christi,TAMUCC
+Texas A&M University–Kingsville,TAMUK
+Texas Christian University,TCU
+Texas Southern University,Texas Southern
+Texas State University,Texas State
+Texas Tech University Health Sciences Center,TTUHSC
+Texas Woman's University,TWU
+The New School,The New School
+The University of Texas at Tyler,UT Tyler
+The University of Texas Medical Branch at Galveston,UTMB
+The University of Texas Rio Grande Valley,UTRGV
+The University of West Florida,UWF
+Thomas Jefferson University,TJU
+University of AkronMain Campus,Akron
+"University of Alabama, Huntsville",UAH
+University of Alaska Fairbanks,UAF
+University of Arkansas at Little Rock,UALR
+University of Arkansas for Medical Sciences,UAMS
+University of Colorado Colorado Springs,UCCS
+University of Massachusetts Chan Medical School,UMass Chan
+University of Massachusetts Dartmouth,UMass Dartmouth
+University of Michigan-Dearborn,UM-Dearborn
+University of Missouri–St. Louis,UMSL
+University of Nebraska Omaha,UNO
+University of New England,UNE
+University of New Orleans,UNO-LA
+University of North Carolina at Greensboro,UNCG
+University of North Carolina Wilmington,UNCW
+University of North Florida,UNF
+University of Northern Colorado,UNCo
+University of Oklahoma-Health Sciences Center,OU HSC
+"University of Puerto Rico, Mayaguez",UPRM
+"University of Puerto Rico, Rio Piedras",UPRRP
+University of San Diego,USD
+University of San Francisco,USFCA
+University of South Alabama,USA
+University of South Dakota,USDAK
+University of Tulsa,TU
+Upstate Medical University,SUNY Upstate
+Villanova University,Villanova
+Virginia State University,VSU
+Wake Forest University,Wake Forest
+West Chester University of Pennsylvania,WCU
+Western Michigan University,WMU
+Wichita State University,Wichita State
+Wright State University,Wright State
+Yeshiva University,YU
+University of Oxford,Oxford
+University of Cambridge,Cambridge
+Swiss Federal Institute of Technology,ETH Zurich
+Imperial College London,Imperial
+University College London,UCL
+The London School of Economics and Political Science,LSE
+Delft University of Technology,TU Delft
+Technical University of Munich,TUM
+PSL Research University,PSL
+Sorbonne University,Sorbonne
+KU Leuven,KU Leuven
+University of Amsterdam,UvA
+Heidelberg University,Heidelberg
+Karolinska Institute,KI
+École Polytechnique Fédérale de Lausanne,EPFL
+University of Copenhagen,UCPH
+University of Edinburgh,UoE
+King's College London,KCL
+Ludwig Maximilian University of Munich,LMU Munich
+Paris-Saclay University,Paris-Saclay
+Trinity College Dublin,TCD
+Sapienza University of Rome,Sapienza
+University of Helsinki,HY
+Ghent University,UGent
+Erasmus University Rotterdam,EUR
+RWTH Aachen University,RWTH
+Humboldt University of Berlin,HU Berlin
+University of Manchester,UoM
+University of Zurich,UZH
+Politecnico di Milano,Polimi
+University of Barcelona,UB-BCN
+Stockholm University,SU
+Uppsala University,UU
+Technical University of Denmark,DTU
+Leiden University,Leiden
+National University of Singapore,NUS
+Nanyang Technological University,NTU
+Singapore Management University,SMU-SG
+Singapore University of Technology and Design,SUTD
+Singapore Institute of Technology,SIT
+Singapore University of Social Sciences,SUSS
+The University of Hong Kong,HKU
+The Chinese University of Hong Kong,CUHK
+The Hong Kong University of Science and Technology,HKUST
+The Hong Kong Polytechnic University,PolyU
+City University of Hong Kong,CityU
+Hong Kong Baptist University,HKBU
+Lingnan University,LU
+The Education University of Hong Kong,EdUHK
+Hong Kong Metropolitan University,HKMU
+Hong Kong Shue Yan University,HKSYU
+The Hang Seng University of Hong Kong,HSUHK
