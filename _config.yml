@@ -58,6 +58,13 @@ Blogroll:
         title: Lijia Yu's website
 
 
+exclude:
+  - api/
+  - Gemfile
+  - Gemfile.lock
+  - vercel.json
+  - node_modules/
+
 ### Build settings
 markdown: kramdown
 #highlighter: pygments

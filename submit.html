@@ -291,11 +291,15 @@ permalink: /submit/
     <!-- Error Alert -->
     <div id="error-alert" class="alert alert-danger" style="display:none;"></div>
 
-    <!-- Generate Button -->
-    <div class="form-group">
-        <button type="button" class="btn btn-primary btn-lg" id="generate-btn">
-            Generate Markdown File
+    <!-- Buttons -->
+    <div class="form-group" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+        <button type="button" class="btn btn-default btn-lg" id="generate-btn">
+            Preview &amp; Download
         </button>
+        <button type="button" class="btn btn-primary btn-lg" id="pr-btn">
+            Submit PR
+        </button>
+        <span id="pr-status" style="font-size:14px;"></span>
     </div>
 
     <!-- Preview + Download -->
@@ -708,6 +712,43 @@ document.getElementById('generate-btn').addEventListener('click', () => {
         a.click();
         document.body.removeChild(a);
     };
+});
+
+document.getElementById('pr-btn').addEventListener('click', async () => {
+    const md = generateMarkdown();
+    if (!md) return;
+
+    const filename = generateFilename();
+    const titleMatch = md.match(/^title:\s*"(.+)"/m);
+    const title = titleMatch ? titleMatch[1] : filename;
+
+    const btn    = document.getElementById('pr-btn');
+    const status = document.getElementById('pr-status');
+
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+    status.style.color = '#888';
+    status.textContent = 'Opening PR on GitHub...';
+
+    try {
+        const res = await fetch('/api/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: md, filename, title }),
+        });
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.error || 'Unknown error');
+
+        status.style.color = 'green';
+        status.innerHTML = '✓ PR created: <a href="' + data.pr_url + '" target="_blank">#' + data.pr_number + ' View on GitHub</a>';
+    } catch (err) {
+        status.style.color = '#c00';
+        status.textContent = '✗ ' + err.message;
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Submit PR';
+    }
 });
 </script>
 </body>
