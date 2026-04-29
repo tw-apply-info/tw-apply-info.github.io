@@ -326,6 +326,10 @@ permalink: /submit/
 </div>
 
 <script>
+// ─── API Endpoint ─────────────────────────────────────────────────────────────
+// TODO: replace with your actual Vercel URL after deploying
+const API_ENDPOINT = 'https://YOUR_PROJECT.vercel.app/api/submit';
+
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function escHtml(s) {
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -731,7 +735,7 @@ document.getElementById('pr-btn').addEventListener('click', async () => {
     status.textContent = 'Opening PR on GitHub...';
 
     try {
-        const res = await fetch('/api/submit', {
+        const res = await fetch(API_ENDPOINT, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ content: md, filename, title }),
