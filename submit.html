@@ -736,8 +736,13 @@ document.getElementById('pr-btn').addEventListener('click', async () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ content: md, filename, title }),
         });
-        const data = await res.json();
-
+        const text = await res.text();
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch {
+            throw new Error('Server returned non-JSON response. Are you running on Vercel? (use `vercel dev` locally)');
+        }
         if (!res.ok) throw new Error(data.error || 'Unknown error');
 
         status.style.color = 'green';

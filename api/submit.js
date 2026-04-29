@@ -6,7 +6,18 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { content, filename, title } = req.body || {};
+  // Parse body manually in case Vercel doesn't auto-parse
+  let body = req.body;
+  if (!body || typeof body === 'string') {
+    try {
+      const chunks = [];
+      for await (const chunk of req) chunks.push(chunk);
+      body = JSON.parse(Buffer.concat(chunks).toString());
+    } catch {
+      return res.status(400).json({ error: 'Invalid JSON body' });
+    }
+  }
+  const { content, filename, title } = body || {};
 
   if (!content || !filename) {
     return res.status(400).json({ error: 'Missing content or filename' });
