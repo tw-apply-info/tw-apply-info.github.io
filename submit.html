@@ -293,29 +293,10 @@ permalink: /submit/
 
     <!-- Buttons -->
     <div class="form-group" style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
-        <button type="button" class="btn btn-default btn-lg" id="generate-btn">
-            Preview &amp; Download
-        </button>
         <button type="button" class="btn btn-primary btn-lg" id="pr-btn">
-            Submit PR
+            Submit
         </button>
         <span id="pr-status" style="font-size:14px;"></span>
-    </div>
-
-    <!-- Preview + Download -->
-    <div id="preview-section">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h4 class="panel-title">Preview</h4></div>
-            <div class="panel-body">
-                <pre id="preview-box"></pre>
-                <div style="margin-top:15px; display:flex; align-items:center; gap:12px;">
-                    <button type="button" class="btn btn-success btn-lg" id="download-btn">
-                        Download .md File
-                    </button>
-                    <span class="text-muted" id="filename-label"></span>
-                </div>
-            </div>
-        </div>
     </div>
 
     <hr>
@@ -697,25 +678,6 @@ function generateFilename() {
     return date + '-' + time + '-' + year + '-' + season + '.md';
 }
 
-document.getElementById('generate-btn').addEventListener('click', () => {
-    const md = generateMarkdown();
-    if (!md) return;
-    const filename = generateFilename();
-    document.getElementById('preview-box').textContent = md;
-    document.getElementById('filename-label').textContent = filename;
-    const section = document.getElementById('preview-section');
-    section.style.display = 'block';
-    section.scrollIntoView({ behavior: 'smooth' });
-    document.getElementById('download-btn').onclick = () => {
-        const blob = new Blob([md], { type: 'text/plain;charset=utf-8' });
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    };
-});
 
 document.getElementById('pr-btn').addEventListener('click', async () => {
     const md = generateMarkdown();
@@ -749,13 +711,13 @@ document.getElementById('pr-btn').addEventListener('click', async () => {
         if (!res.ok) throw new Error(data.error || 'Unknown error');
 
         status.style.color = 'green';
-        status.innerHTML = '✓ PR created: <a href="' + data.pr_url + '" target="_blank">#' + data.pr_number + ' View on GitHub</a>';
+        status.textContent = '✓ Submitted successfully! Thank you for sharing your experience.';
     } catch (err) {
         status.style.color = '#c00';
         status.textContent = '✗ ' + err.message;
     } finally {
         btn.disabled = false;
-        btn.textContent = 'Submit PR';
+        btn.textContent = 'Submit';
     }
 });
 </script>
