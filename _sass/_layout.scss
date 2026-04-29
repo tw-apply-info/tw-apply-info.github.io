@@ -30,8 +30,18 @@
   line-height:56px;
   letter-spacing: -1px;
   margin-bottom: 0;
-  text-align:center; 
+  text-align:center;
   color: $grey-color;
+}
+
+.site-submit {
+  text-align: center;
+  margin-top: -8px;
+  margin-bottom: 16px;
+  font-size: 15px;
+  a:visited {
+    color: $brand-top-color;
+  }
 }
 
 .site-nav {
@@ -205,10 +215,6 @@
   font-size: 22px;
   letter-spacing: -1px;
   line-height: 1;
-
-  @include media-query($on-laptop) {
-    font-size: 20px;
-  }
 }
 
 
