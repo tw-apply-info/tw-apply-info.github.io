@@ -565,7 +565,7 @@ addRow(); addRow(); addRow();
 function generateMarkdown() {
     const season   = document.getElementById('term-season').value;
     const year     = document.getElementById('term-year').value.trim();
-    const term     = season + ' ' + year;
+    const term     = year + ' ' + season;
     const decision = document.getElementById('decision').value.trim();
     const bg       = document.getElementById('background').value.trim();
     const eng      = document.getElementById('english-scores').value.trim();
