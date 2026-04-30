@@ -159,7 +159,7 @@ permalink: /submit/
                     </div>
                     <div class="col-sm-2">
                         <input type="number" class="form-control" id="term-year"
-                               placeholder="Year" min="2000" max="2099" value="2025">
+                               placeholder="Year" min="2000" max="2099" value="2026">
                     </div>
                 </div>
 
@@ -619,7 +619,7 @@ function generateMarkdown() {
     fm += 'category: ' + year + ' ' + season + '\n';
     if (degrees.length)  fm += 'degrees:\n'  + degrees.map(d => '- ' + d).join('\n')  + '\n';
     if (programs.length) fm += 'programs:\n' + programs.map(p => '- ' + p).join('\n') + '\n';
-    if (research.length) fm += 'research:\n' + research.map(r => '- ' + r).join('\n') + '\n';
+    if (research.length) fm += 'research:\n' + research.map(r => '- "' + r + '"').join('\n') + '\n';
     if (allAbbr.length)  fm += 'tags:\n'     + allAbbr.map(s  => '- ' + s).join('\n')  + '\n';
     fm += '---';
 
@@ -645,7 +645,7 @@ function generateMarkdown() {
         '#### English Scores\n\n'      + para(eng),
         '#### Publications\n\n'        + para(pubs),
         '#### Recommendations\n\n'     + para(recs),
-        '#### Other Comments\n\n'      + other,
+        '#### Other Comments\n\n'      + para(other),
     ].join('\n\n');
 
     return fm + '\n' + body + '\n';

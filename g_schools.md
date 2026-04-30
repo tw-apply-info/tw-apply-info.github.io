@@ -6,16 +6,22 @@ permalink: /schools/
 
 <ul class="tags-box">
 {% if site.posts != empty %}
-{% assign sorted_tags = site.tags | sort %}
-{% for tag in sorted_tags %}
-<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}<span class="size"> {{ tag[1].size }}</span></a>
+{% assign tag_names = "" | split: "" %}
+{% for tag in site.tags %}
+  {% assign tag_names = tag_names | push: tag[0] %}
+{% endfor %}
+{% assign tag_names = tag_names | sort %}
+{% for tag_name in tag_names %}
+{% assign tag_posts = site.tags[tag_name] %}
+<a href="#{{ tag_name }}" title="{{ tag_name }}" rel="{{ tag_posts.size }}">{{ tag_name }}<span class="size"> {{ tag_posts.size }}</span></a>
 {% endfor %}
 </ul>
 
 <ul class="tags-box">
-{% for tag in sorted_tags %}
-<li  id="{{ tag[0] }}">{{ tag[0] }}</li>
-{% for post in tag[1] %}
+{% for tag_name in tag_names %}
+{% assign tag_posts = site.tags[tag_name] %}
+<li id="{{ tag_name }}">{{ tag_name }}</li>
+{% for post in tag_posts %}
 <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time> &raquo;
 <a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a><br />
 {% endfor %}
