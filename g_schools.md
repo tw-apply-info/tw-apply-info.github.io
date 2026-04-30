@@ -6,13 +6,14 @@ permalink: /schools/
 
 <ul class="tags-box">
 {% if site.posts != empty %}
-{% for tag in site.tags %}
+{% assign sorted_tags = site.tags | sort %}
+{% for tag in sorted_tags %}
 <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}<span class="size"> {{ tag[1].size }}</span></a>
 {% endfor %}
 </ul>
 
 <ul class="tags-box">
-{% for tag in site.tags %}
+{% for tag in sorted_tags %}
 <li  id="{{ tag[0] }}">{{ tag[0] }}</li>
 {% for post in tag[1] %}
 <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time> &raquo;
