@@ -142,7 +142,7 @@ a {
   text-decoration: none;
 
   &:visited {
-    color: darken($brand-top-color, 25%);
+    color: $brand-top-color;
   }
 
   &:hover {
@@ -156,8 +156,8 @@ a {
   color: $brand-color;    
   text-decoration: none;  
   border-bottom: 1px dotted;
-  &:visited {             
-    color: darken($brand-color, 25%);
+  &:visited {
+    color: $brand-color;
   }                       
 
   &:hover {               
