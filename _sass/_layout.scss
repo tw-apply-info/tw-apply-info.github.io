@@ -179,6 +179,7 @@
   display: block;
   font-size: 22px;
   line-height: 1.4;
+  letter-spacing: 0px;
   &:visited { color: $brand-top-color; }
   &:hover { color: #669900; text-decoration: underline; }
 }
@@ -211,7 +212,7 @@
 
 .post-title {
   font-size: 22px;
-  letter-spacing: -1px;
+  letter-spacing: 0px;
   line-height: 1.4;
 }
 

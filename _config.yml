@@ -72,5 +72,5 @@ kramdown:
         input: GFM
         syntax_highlighter: rouge
 plugins: [jekyll-paginate]
-paginate: 20
+paginate: 15
 excerpt_separator: <!-- more -->
