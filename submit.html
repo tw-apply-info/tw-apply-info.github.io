@@ -712,7 +712,7 @@ document.getElementById('pr-btn').addEventListener('click', async () => {
         if (!res.ok) throw new Error(data.error || 'Unknown error');
 
         status.style.color = 'green';
-        status.textContent = '✓ Submitted successfully! Thank you for sharing your experience.';
+        status.textContent = '✓ Thank you for sharing your experience! Your submission will be published on the webpage soon.';
     } catch (err) {
         status.style.color = '#c00';
         status.textContent = '✗ ' + err.message;
