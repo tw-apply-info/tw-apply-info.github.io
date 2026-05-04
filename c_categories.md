@@ -24,7 +24,7 @@ permalink: /categories/
 {% for cat_name in cat_names %}
 {% assign cat_posts = site.categories[cat_name] %}
 <li class="tag-section" id="{{ cat_name }}" data-tag="{{ cat_name }}">
-  <strong>{{ cat_name }}</strong>
+  {{ cat_name }}
   {% for post in cat_posts %}
   <br /><time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time> &raquo;
   <a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>

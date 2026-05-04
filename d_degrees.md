@@ -28,7 +28,7 @@ permalink: /degrees/
 {% for degree in all_degrees %}
 {% assign degree_posts = site.posts | where_exp: "post", "post.degrees contains degree" %}
 <li class="tag-section" id="{{ degree }}" data-tag="{{ degree }}">
-  <strong>{{ degree }}</strong>
+  {{ degree }}
   {% for post in degree_posts %}
   <br /><time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time> &raquo;
   <a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>

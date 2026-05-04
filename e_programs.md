@@ -28,7 +28,7 @@ permalink: /programs/
 {% for program in all_programs %}
 {% assign program_posts = site.posts | where_exp: "post", "post.programs contains program" %}
 <li class="tag-section" id="{{ program }}" data-tag="{{ program }}">
-  <strong>{{ program }}</strong>
+  {{ program }}
   {% for post in program_posts %}
   <br /><time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time> &raquo;
   <a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>

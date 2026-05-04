@@ -28,7 +28,7 @@ permalink: /research/
 {% for item in all_research %}
 {% assign item_posts = site.posts | where_exp: "post", "post.research contains item" %}
 <li class="tag-section" id="{{ item }}" data-tag="{{ item }}">
-  <strong>{{ item }}</strong>
+  {{ item }}
   {% for post in item_posts %}
   <br /><time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time> &raquo;
   <a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>

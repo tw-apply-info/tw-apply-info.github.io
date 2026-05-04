@@ -23,7 +23,7 @@ permalink: /schools/
 {% for tag_name in tag_names %}
 {% assign tag_posts = site.tags[tag_name] %}
 <li class="tag-section" id="{{ tag_name }}" data-tag="{{ tag_name }}">
-  <strong>{{ tag_name }}</strong>
+  {{ tag_name }}
   {% for post in tag_posts %}
   <br /><time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time> &raquo;
   <a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
