@@ -621,7 +621,8 @@ function generateMarkdown() {
     if (degrees.length)  fm += 'degrees:\n'  + degrees.map(d => '- ' + d).join('\n')  + '\n';
     if (programs.length) fm += 'programs:\n' + programs.map(p => '- ' + p).join('\n') + '\n';
     if (research.length) fm += 'research:\n' + research.map(r => '- "' + r + '"').join('\n') + '\n';
-    if (allAbbr.length)  fm += 'tags:\n'     + allAbbr.map(s  => '- ' + s).join('\n')  + '\n';
+    const uniqueAbbr = [...new Set(allAbbr)];
+    if (uniqueAbbr.length) fm += 'tags:\n' + uniqueAbbr.map(s => '- "' + s + '"').join('\n') + '\n';
     fm += '---';
 
     const tableHeader = '| School | Program | Result | Date |\n| :-- | :--: | :--: | :--: |';
