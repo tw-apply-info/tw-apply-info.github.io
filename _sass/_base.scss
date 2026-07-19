@@ -154,7 +154,7 @@ a {
 .post-content a{
   color: $brand-color;    
   text-decoration: none;  
-  border-bottom: 1px dotted;
+  border-bottom: none;
   &:visited {
     color: $brand-color;
   }                       
@@ -285,13 +285,14 @@ table {
 }
 table tr {
   border-top: 1px solid #cccccc;
-  background-color: white;
+  background-color: transparent;
   margin: 0;
   padding: 0;
 }
-table tr:nth-child(2n) { background-color: #f8f8f8; }
+table tr:nth-child(2n) { background-color: transparent; }
 table tr th {
   font-weight: bold;
+  background-color: rgba(0,0,0,.06);
   border: 1px solid #cccccc;
   margin: 0;
   padding: 3px 6px;
