@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <style>
 .tag-filter-active {
-  background: #2a7ae2;
+  background: #2f5d8a;
   color: #fff !important;
   border-radius: 3px;
   padding: 1px 5px;
