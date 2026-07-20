@@ -180,6 +180,7 @@
   font-size: 22px;
   line-height: 1.4;
   letter-spacing: 0px;
+  overflow-wrap: break-word;
   &:visited { color: $brand-top-color; }
   &:hover { color: $hover-color; text-decoration: none; }
 }
@@ -214,6 +215,7 @@
   font-size: 22px;
   letter-spacing: 0px;
   line-height: 1.4;
+  overflow-wrap: break-word;
 }
 
 

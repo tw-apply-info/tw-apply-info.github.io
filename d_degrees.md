@@ -31,7 +31,7 @@ permalink: /degrees/
   {{ degree }}
   {% for post in degree_posts %}
   <br /><time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time> &raquo;
-  <a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+  <a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}">{{ post.title | replace: '/', '/<wbr>' }}</a>
   {% endfor %}
 </li>
 {% endfor %}
